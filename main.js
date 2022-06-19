@@ -27,21 +27,37 @@ function operate (previousOperand, currentOperand, operator){
     };
 };
 
+
+//functions handling the buttons and display 
+let newValue = [];
+
 function getNumber () {
     const numbers = document.querySelectorAll(".number");
     const display = document.querySelector("#display")
-    const newValue = [];
+   
     numbers.forEach((button)=>{
        button.addEventListener("click", (e)=>{
-         if(display.innerText === "0" && e.target.innerText==="0"){
+         if (display.innerText === "0" && e.target.innerText==="0"){
+            
             return display.innerText = "0";
-         }else if(display.innerText.length < 21){
+         
+        }else if (display.innerText.length < 21){
+            
             newValue.push(e.target.innerText);
             return display.innerText = newValue.join("");
-         }else if(display.innerText === "0" && e.target.innerText === "."){
-             
-         }
-       })
-    })
+         };
+       });
+    });
+};
+
+function allClear(){
+    const display = document.querySelector("#display");
+    newValue = [];
+    return display.innerText = "0";
 }
+
+const clearButton = document.querySelector("#clear");
+
+clearButton.addEventListener("click", allClear);
+
 getNumber();

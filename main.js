@@ -65,3 +65,14 @@ function allClear(){
 const clearButton = document.querySelector("#clear");
 
 clearButton.addEventListener("click", allClear);
+
+// delete handler
+
+function handleDelete () {
+    const display = document.querySelector("#display");
+    return display.innerText = display.innerText.slice(0, display.innerText.length-1);
+}
+
+const deleteButton = document.querySelector("#delete");
+
+deleteButton.addEventListener("click", handleDelete);

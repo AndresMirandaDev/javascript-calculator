@@ -29,35 +29,39 @@ function operate (previousOperand, currentOperand, operator){
 
 
 //functions handling the buttons and display 
-let newValue = [];
 
-function getNumber () {
-    const numbers = document.querySelectorAll(".number");
-    const display = document.querySelector("#display")
-   
-    numbers.forEach((button)=>{
-       button.addEventListener("click", (e)=>{
-         if (display.innerText === "0" && e.target.innerText==="0"){
+const numbers = document.querySelectorAll(".number");
+const display = document.querySelector("#display");
+
+//number buttons
+numbers.forEach(button=>{
+    button.addEventListener("click", (e)=>{
+        if (display.innerText === "0" && e.target.innerText==="0"){
             
             return display.innerText = "0";
-         
-        }else if (display.innerText.length < 21){
-            
-            newValue.push(e.target.innerText);
-            return display.innerText = newValue.join("");
-         };
-       });
-    });
-};
+             
+        }else if (display.innerText.length < 12){
+    
+            return display.innerText = display.innerText.concat(e.target.innerText).replace(/^0/g, "");
+        };
+    })
+});
 
+//decimal button handler
+const decimalButton = document.querySelector("#decimal");
+
+decimalButton.addEventListener("click", (e)=>{
+    if(!display.innerText.includes(".")){
+       display.innerText = display.innerText.concat(e.target.innerText);
+    };
+});
+
+//clear display function
 function allClear(){
     const display = document.querySelector("#display");
-    newValue = [];
     return display.innerText = "0";
 }
 
 const clearButton = document.querySelector("#clear");
 
 clearButton.addEventListener("click", allClear);
-
-getNumber();

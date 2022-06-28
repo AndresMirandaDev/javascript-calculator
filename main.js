@@ -92,7 +92,15 @@ operationButtons.forEach((button)=>{
     button.addEventListener("click", (e)=>{
         previousValue = display.innerText;
         currentOperator = e.target.innerText;
-        operationDisplay.innerText = display.innerText + e.target.innerText;
-        display.innerText = "0";
+        operationDisplay.innerText = operationDisplay.innerText.concat(display.innerText + e.target.innerText);
+        display.innerText = "0"
     })
 })
+
+
+//evaluate button
+let evaluated = false;
+const evaluateButton = document.querySelector("#equal")
+evaluateButton.addEventListener("click", (e=>{
+    display.innerText = operate(parseInt(previousValue), parseInt(display.innerText), currentOperator);
+}))

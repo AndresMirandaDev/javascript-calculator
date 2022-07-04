@@ -88,6 +88,7 @@ deleteButton.addEventListener("click", handleDelete);
 const operationButtons = document.querySelectorAll(".operator");
 const operationDisplay = document.querySelector("#operation");
 operationButtons.forEach((button)=>{
+    
     button.addEventListener("click", (e)=>{
         previousValue = display.innerText;
         currentOperator = e.target.innerText;
@@ -101,6 +102,11 @@ operationButtons.forEach((button)=>{
 //equal button
 const evaluateButton = document.querySelector("#equal")
 evaluateButton.addEventListener("click", (e)=>{
-    display.innerText = Math.round(operate(parseFloat(previousValue), parseFloat(display.innerText), currentOperator)*10000000000)/10000000000;
+    let result = Math.round(operate(parseFloat(previousValue), parseFloat(display.innerText), currentOperator)*10000000000)/10000000000;
+    if(!!result === !!NaN ||result === Infinity ){
+        display.innerText = "error";
+    }else{
+        display.innerText = result;
+    }
     operationDisplay.innerText = ""
 })

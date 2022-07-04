@@ -42,13 +42,12 @@ let currentOperator = "";
 //number buttons
 numbers.forEach(button=>{
     button.addEventListener("click", (e)=>{
+        let decimalCheck = /^0.[0-9]+/g;
         if (display.innerText === "0" && e.target.innerText==="0"){
-            
              display.innerText = "0";
-             
+
         }else if (display.innerText.length < 12){
-    
-             display.innerText = display.innerText.concat(e.target.innerText).replace(/^0/g, "");
+             display.innerText = display.innerText.concat(e.target.innerText).replace(/^0\d+/g, e.target.innerText);
         }
     })
 });
@@ -94,13 +93,14 @@ operationButtons.forEach((button)=>{
         currentOperator = e.target.innerText;
         operationDisplay.innerText = operationDisplay.innerText.concat(display.innerText + e.target.innerText);
         display.innerText = "0"
+        
     })
 })
 
 
-//evaluate button
-let evaluated = false;
+//equal button
 const evaluateButton = document.querySelector("#equal")
-evaluateButton.addEventListener("click", (e=>{
-    display.innerText = operate(parseInt(previousValue), parseInt(display.innerText), currentOperator);
-}))
+evaluateButton.addEventListener("click", (e)=>{
+    display.innerText = Math.round(operate(parseFloat(previousValue), parseFloat(display.innerText), currentOperator)*10000000000)/10000000000;
+    operationDisplay.innerText = ""
+})
